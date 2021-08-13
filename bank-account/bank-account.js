@@ -3,30 +3,45 @@
 // convenience to get you started writing code faster.
 //
 
+const STATUS = {
+  open: "opened",
+  close: 'closed'
+}
+
 export class BankAccount {
   constructor() {
-    throw new Error('Remove this statement and implement this function');
+    this.statusAccount = STATUS.close
   }
 
   open() {
-    throw new Error('Remove this statement and implement this function');
+    if (this.statusAccount === STATUS.open) throw new ValueError();
+    else {
+      this.statusAccount = STATUS.open;
+      this.money = 0
+    }
   }
 
   close() {
-    throw new Error('Remove this statement and implement this function');
+    if (this.statusAccount === STATUS.close) throw new ValueError();
+    else this.statusAccount = STATUS.close
   }
 
-  deposit() {
-    throw new Error('Remove this statement and implement this function');
+  deposit(money) {
+    if (this.statusAccount === STATUS.close || money < 0) throw new ValueError();
+    else this.money += money;
   }
 
-  withdraw() {
-    throw new Error('Remove this statement and implement this function');
+  withdraw(draw) {
+    let calAfter = this.money - draw
+    if (this.statusAccount === STATUS.close || calAfter < 0 || draw < 0) throw new ValueError();
+    this.money = calAfter;
   }
 
   get balance() {
-    throw new Error('Remove this statement and implement this function');
+    if (this.statusAccount === STATUS.close) throw new ValueError();
+    else return this.money
   }
+
 }
 
 export class ValueError extends Error {
